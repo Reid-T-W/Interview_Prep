@@ -46,6 +46,29 @@ def print_singly_linked_list(node, sep, fptr):
 #     SinglyLinkedListNode next
 #
 #
+def mergeTwoLists(head1, head2):
+    mergedList = head1
+    while (head1 and head2):
+        # print("outer head1", head1.data)
+        if (head1.data <= head2.data):
+            # print("head1", head1.data, "head2", head2.data)
+            # print("head1 next", head1.next.data, "head2 next", head2.next.data)
+            prev1 = head1
+            head1 = head1.next
+        else:
+            # print("In else head1", head1.data, "head2", head2.data)
+            prev1.next = head2
+            # Iterate until you get a point where the data in
+            # head2 is less than the one in head1
+            prev2 = head2
+            while (head2 and head2.data <= head1.data):
+                prev2 = head2
+                head2 = head2.next
+            prev2.next = head1
+    if head2:
+        prev1.next = head2
+    return mergedList
+
 def mergeLists(head1, head2):
     """
     Given two linked lists it merges them in a sorted manner
@@ -72,30 +95,11 @@ def mergeLists(head1, head2):
     # the lowest value, keep on incrementing to the next node until
     # you find a value greater than the value in the other list
     if head1.data <= head2.data: 
-        mergedList = head1
-        while (head1 and head1.data <= head2.data):
-            prev1 = head1
-            head1 = head1.next
-        # temp = prev1
-        prev1.next = head2
-        # Iterate to the end of head 2 to get the last Node and connect
-        # with list 1
-        while head2.next is not None:
-            head2 = head2.next
-        head2.next = head1
+        mergedList = mergeTwoLists(head1, head2)
         return mergedList
     
     if head2.data <= head1.data:
-        mergedList = head2
-        while (head2 and head2.data <= head1.data):
-            prev2 = head2
-            head2 = head2.next
-        prev2.next = head1
-        # Iterate to the end of head 1 to get the last Node and connect
-        # with list 2
-        while head1.next is not None:
-            head1 = head1.next
-        head1.next = head2
+        mergedList = mergeTwoLists(head2, head1)
         return mergedList
    
 
