@@ -18,35 +18,57 @@ import sys
 
 def twoArrays(k, A, B):
     # Write your code here
+    # Method 2 (Inspired by Hackerrank discussions)
     # Populate a diff_arr for A
     a_diff = []
     for num_a in A:
         if (k - num_a) >= 0:
             a_diff.append(k - num_a)
     
-    a_diff.sort(reverse=True)
+    a_diff.sort()
     B.sort()
-    found = False
 
     # For each element in a_diff check if a corresponding 
     # element exists in B, the condition that must be satisfied
     # is element in B must be greater than or equal to the 
     # element in a_diff. This criteria should be satisfied for 
     # every element in a_diff, if not return 'NO'
-    for num_a in a_diff:
-        found = False
-        if num_a <= 0:
-            found = True
-        for i in range(len(B)):
-            # The first check is required because explored
-            # elements in B will be marked as negative
-            if B[i] >= 0 and B[i] >= num_a:
-                B[i] = -B[i]
-                found = True
-                break
-        if found == False:
+    for i in range(len(a_diff)):
+        if B[i] < a_diff[i]:
             return 'NO'
     return 'YES'
+
+
+    # # Method 1
+    # # Populate a diff_arr for A
+    # a_diff = []
+    # for num_a in A:
+    #     if (k - num_a) >= 0:
+    #         a_diff.append(k - num_a)
+    
+    # a_diff.sort(reverse=True)
+    # B.sort()
+    # found = False
+
+    # # For each element in a_diff check if a corresponding 
+    # # element exists in B, the condition that must be satisfied
+    # # is element in B must be greater than or equal to the 
+    # # element in a_diff. This criteria should be satisfied for 
+    # # every element in a_diff, if not return 'NO'
+    # for num_a in a_diff:
+    #     found = False
+    #     if num_a <= 0:
+    #         found = True
+    #     for i in range(len(B)):
+    #         # The first check is required because explored
+    #         # elements in B will be marked as negative
+    #         if B[i] >= 0 and B[i] >= num_a:
+    #             B[i] = -B[i]
+    #             found = True
+    #             break
+    #     if found == False:
+    #         return 'NO'
+    # return 'YES'
 
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
