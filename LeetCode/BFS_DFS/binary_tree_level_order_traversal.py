@@ -29,9 +29,10 @@ class Solution:
             queue_append = []
             items = queue.popleft()
             for item in items:
-                visted_append.append[item.val]
-                queue_append.append[item.left]
-                queue_append.append[item.right]
+                if item:
+                    visted_append.append(item.val)
+                    queue_append.append(item.left)
+                    queue_append.append(item.right)
             if visted_append:
                 visited.append(visted_append)
             if queue_append:
