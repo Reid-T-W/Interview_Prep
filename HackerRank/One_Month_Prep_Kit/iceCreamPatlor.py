@@ -49,8 +49,10 @@ def icecreamParlor(m, arr):
 
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
+    # Reading from file
     rptr = open('input.txt', 'r')
     t =  int(rptr.readline())
+    # Reading from command line
     # t = int(input().strip())
 
     for t_itr in range(t):
